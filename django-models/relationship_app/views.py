@@ -40,7 +40,7 @@ from django.http import HttpResponseForbidden
 
 # Helper functions for role checking
 def is_admin(user):
-    return user.userprofile.role == 'Admin'
+   return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
 
 def is_librarian(user):
     return user.userprofile.role == 'Librarian'
