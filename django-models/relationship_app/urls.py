@@ -18,6 +18,7 @@ from . import views
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='relationship_app/login.html'), name='login')
     path('logout/', auth_views.LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout')
+<<<<<<< HEAD
     path('register/',auth_views.RegisterView.as_view(template_name='relationship_app/register.html'), name='register')
 ]
 
@@ -30,3 +31,7 @@ urlpatterns= [
     path('member/', views.member_view, name='member_view'),
     path('librarian/', views.librarian_view, name='librarian_view')
 ]
+=======
+    path('register/',"views.register"(template_name='relationship_app/register.html'), name='register')
+]
+>>>>>>> 7f73036afd26fa570cf10f24e3d425e0778740df
