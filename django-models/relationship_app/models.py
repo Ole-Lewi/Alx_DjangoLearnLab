@@ -53,3 +53,20 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver (post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
+
+    from django.db import models
+
+    class Book(models.Model):
+        title= models.CharField(max_length=100)
+        author= models.CharField(max_length=100)
+        published_date=models.DateField()
+
+        class Meta:
+             permissions =[
+                 ("can_add_book" = "can add book"),
+                 ("can_change_book"='can edit book'),
+                 ("can_delete_book"="can delete book"),
+                
+             ]
+def _str_(self):
+    return self.title
