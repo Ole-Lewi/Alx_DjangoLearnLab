@@ -12,7 +12,7 @@ class LibraryDetailView(DetailView):
     model = Library
     template_name = 'library_detail.html'
     context_object_name = 'library'
-
+"relationship_app/library_detail.html"
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm,AuthenticatioForm
 from django.shortcuts import render, redirect
