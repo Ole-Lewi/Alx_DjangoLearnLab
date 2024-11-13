@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
 SECRET_KEY = 'your-secret-key-here'  # Replace with a secure key in production
-DEBUG = True  # Set to False in production
+DEBUG = False  # Set to False in production
 
 ALLOWED_HOSTS = []  # Add allowed hostnames or IPs for production
 
@@ -95,3 +95,23 @@ STATICFILES_DIRS = [BASE_DIR / "static"]  # Directory for static files
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#Add these settings to ensure the browser applies additional security filters
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# CSRF protection enabled to prevent CSRF attacks by adding a token to each form submission
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE-SECURE =True
+
+ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
+
+MIDDLEWARE = [
+    'csp.middleware.CSPMiddleware',
+    # other middleware
+]
+
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
+# Add other directives as needed

@@ -31,3 +31,17 @@ def book_delete(request, pk):
         return redirect('book_list')
     return render(request, 'book_confirm_delete.html', {'book': book})
 
+
+from django import forms
+
+class SearchForm(forms.Form):
+    query = forms.CharField(max_length=100)
+
+def search_view(request):
+    form = SearchForm(request.GET)
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        results = Book.objects.filter(title__icontains=query)
+        return render(request, 'bookshelf/book_list.html', {'results': results})
+
+
