@@ -32,7 +32,7 @@ def book_delete(request, pk):
     return render(request, 'book_confirm_delete.html', {'book': book})
 
 
-from django import forms
+from .forms import ExampleForm
 
 class SearchForm(forms.Form):
     query = forms.CharField(max_length=100)
