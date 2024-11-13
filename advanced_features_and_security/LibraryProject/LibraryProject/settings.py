@@ -102,7 +102,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # CSRF protection enabled to prevent CSRF attacks by adding a token to each form submission
 CSRF_COOKIE_SECURE = True
-SESSION_COOKIE-SECURE =True
+SESSION_COOKIE_SECURE =True
 
 ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
 
