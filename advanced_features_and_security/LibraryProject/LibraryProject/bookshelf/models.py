@@ -41,3 +41,19 @@ objects = CustomUserManager()
 from django.conf import settings
 class SomeModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateField(auto_now_add=True)
+
+    Class Meta:
+        permissions = [
+            ("can_view", "can view post"),
+            ("can_create", "can create post"),
+            ("can_edit", "can edit post"),
+            ("can_delete", "can delete post"),
+        ]
+def _str_(self):
+    return self.title
+
