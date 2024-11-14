@@ -94,14 +94,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]  # Directory for static files
 
 # Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.dbg.models.BigAutoField'
 #Add these settings to ensure the browser applies additional security filters
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True  #enables XSS protection on browser.
+X_FRAME_OPTIONS = 'DENY'  #protects against clickjacking.
+SECURE_CONTENT_TYPE_NOSNIFF = True  #protects from MIME sniffing
 
 # CSRF protection enabled to prevent CSRF attacks by adding a token to each form submission
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True   #This ensures that sensitive cookies (like session and CSRF tokens) are not sent over unencrypted connections.
 SESSION_COOKIE_SECURE =True
 
 ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
@@ -115,3 +115,8 @@ CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
 # Add other directives as needed
+
+SECURE_SSL_REDIRECT = True  # redirects all HTTP request to HTTPS.
+SECURE_HSTS_SECONDS = 31536000 #instructs users to use for 1 year.
+SECURE_HSTS_INCLUDE_SUBDORMAINS =True
+SECURE_HSTS_PRELOAD = True
