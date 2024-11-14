@@ -118,5 +118,5 @@ CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
 
 SECURE_SSL_REDIRECT = True  # redirects all HTTP request to HTTPS.
 SECURE_HSTS_SECONDS = 31536000 #instructs users to use for 1 year.
-SECURE_HSTS_INCLUDE_SUBDORMAINS =True
+SECURE_HSTS_INCLUDE_SUBDOMAINS =True
 SECURE_HSTS_PRELOAD = True
