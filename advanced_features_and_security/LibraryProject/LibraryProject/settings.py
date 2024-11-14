@@ -100,6 +100,8 @@ SECURE_BROWSER_XSS_FILTER = True  #enables XSS protection on browser.
 X_FRAME_OPTIONS = 'DENY'  #protects against clickjacking.
 SECURE_CONTENT_TYPE_NOSNIFF = True  #protects from MIME sniffing
 
+["bookshelf.CustomUser"]
+
 # CSRF protection enabled to prevent CSRF attacks by adding a token to each form submission
 CSRF_COOKIE_SECURE = True   #This ensures that sensitive cookies (like session and CSRF tokens) are not sent over unencrypted connections.
 SESSION_COOKIE_SECURE =True
