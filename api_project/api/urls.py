@@ -15,3 +15,10 @@ urlpatterns = [
     # Include the router URLs for BookViewSet (all CRUD operations)
     path('', include(router.urls)),  # This includes all routes registered with the router
 ]
+
+from rest_framework.authtoken.views import obtain_auth_token
+
+urlpatterns = [
+    # Your other URLs
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+]
