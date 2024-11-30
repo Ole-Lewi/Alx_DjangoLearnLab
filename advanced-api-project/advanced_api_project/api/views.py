@@ -10,8 +10,7 @@ class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.AllowAny]
-    filter_backends = [SearchFilter]
-    search_fields = ['author_name'] #allowing searching by author
+   
 
 #DetailView: List a single book by ID
 class BookDetailView(generics.DetailAPIView):
