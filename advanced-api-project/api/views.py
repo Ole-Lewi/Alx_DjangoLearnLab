@@ -14,7 +14,7 @@ class BookListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
    
     filterset_fields = ['author_name', 'publication_year', 'title'] #allowing filtering by available fields.
-    search_fields = ['title', 'author_name'] # allowing filtering by title or author_name.
+    filters.SearchFilter = ['title', 'author_name'] # allowing filtering by title or author_name.
     filters.OrderingFilter = ['title','publication_year']
 
 #DetailView: List a single book by ID
