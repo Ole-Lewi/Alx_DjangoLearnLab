@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework 
 # Create your views here.
 from rest_framework import generics, permissions
 from .models import Book
@@ -12,7 +12,7 @@ class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.AllowAny]
-    filter_backends = [DjangoFilterBackend]
+   
     filterset_fields = ['author_name', 'publication_year', 'title'] #allowing filtering by available fields.
     search_fields = ['title', 'author_name'] # allowing filtering by title or author_name.
     order_fields = ['title','publication_year']
