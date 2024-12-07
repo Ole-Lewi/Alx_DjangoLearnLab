@@ -24,7 +24,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fiels = ['username','email','password 1','password 2']
+        fields = ['username','email','password 1','password 2']
 
 def register_view(request):
     if request.method == 'POST':
