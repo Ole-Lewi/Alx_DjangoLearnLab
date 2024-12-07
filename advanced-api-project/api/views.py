@@ -5,7 +5,7 @@ from rest_framework import generics, permissions
 from .models import Book
 from serializers import BookSerializer
 from rest_framework.filters import SearchFilter, OrderingFilter
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 #BookListView: List all books with filtering, ordering and searching capabilities.
 class BookListView(generics.ListAPIView):
