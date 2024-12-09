@@ -135,7 +135,12 @@ class PostDetailView(View):
             return redirect('post-detail', pk=post.pk)
 #edit comment
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView,CreateView,DeleteView
+
+class CommentCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/post_detail.html'
 
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
