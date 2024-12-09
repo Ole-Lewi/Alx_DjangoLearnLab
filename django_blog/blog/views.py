@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from django.views.generic import Listview,DetailView,CreateView,UpdateView,DeleteView
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
