@@ -26,12 +26,12 @@ urlpatterns = [
 
 from .views import PostDetailView,CommentUpdateView,CommentDeleteView
 from.views import search_posts
-from taggit.views import TaggedObjectList
+from taggit.views import PostByTagListView
 from .models import Post
 urlpatterns = [
     path('post/<int:pk>/comments/new/', PostDetailView.as_view(), name='post-detail'),
     path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
     path('search/', search_posts, name='search-posts'),
-    path('tags/<slug:slug>/', TaggedObjectList.as_view(model=Post), name='posts-by-tag'),
+    path('tags/<slug:tag_slug>/', PostByTagListView.as_view(model=Post), name='posts-by-tag'),
 ]
