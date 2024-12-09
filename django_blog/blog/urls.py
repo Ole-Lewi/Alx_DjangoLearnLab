@@ -26,7 +26,7 @@ urlpatterns = [
 
 from .views import PostDetailView,CommentUpdateView,CommentDeleteView
 urlpatterns = [
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('comment/<int:pk>/edit/', CommentUpdateView.as_view(), name='comment-update'),
+    path('post/<int:pk>/comments/new/', PostDetailView.as_view(), name='post-detail'),
+    path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
 ]
