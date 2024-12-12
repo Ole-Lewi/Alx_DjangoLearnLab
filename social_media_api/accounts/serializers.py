@@ -3,7 +3,7 @@ from .models import CustomUser
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
-User = get_user_model()
+User = get_user_model().objects.create_user
 
 class UserRegistrationSerializer(serializers.Serializer): #Used for defining serializer fields, particularly for capturing password input securely.
     passwords = serializers.CharField(write_only=True)
@@ -13,7 +13,7 @@ class UserRegistrationSerializer(serializers.Serializer): #Used for defining ser
         fields = ['id', 'username','bio', 'email', 'profile_picture', 'followers','password']
 
         def create(self, validated_data):
-            user=User.objects.create_user(
+            user=User.get_user_model().objects.create_user(
                 username=validated_data['username'],
                 password=validated_data['password'],
                 email=validated_data.get('email', '')
