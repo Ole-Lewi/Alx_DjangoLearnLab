@@ -49,33 +49,30 @@ from rest_framework.response import Response
 from .models import Post, Like
 from .serializers import LikeSerializer
 from notifications.models import Notification
+from django.shortcuts import get_object_or_404
 
 class LikePostView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = LikeSerializer
 
     def post(self, request, pk):
-        post = Post.objects.get(pk=pk)
-        like, created = Like.objects.get_or_create(user=request.user, post=post)
-        if created:
-            # Create a notification
+        # Get the post
+        post = get_object_or_404(Post, pk=pk)
+        user = request.user
+
+        # Check if the post is already liked
+        like, created = Like.objects.get_or_create(post=post, user=user)
+
+        if not created:
+            # Unlike the post
+            like.delete()
+            return Response({"message": "Post unliked."}, status=status.HTTP_200_OK)
+        else:
+            # Generate a notification
             Notification.objects.create(
                 recipient=post.author,
-                actor=request.user,
-                verb="liked your post",
-                target=post
+                actor=user,
+                verb='liked',
+                target=post,
             )
-            return Response({'message': 'Post liked.'}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({'message': 'Post already liked.'}, status=status.HTTP_400_BAD_REQUEST)
-
-class UnlikePostView(generics.GenericAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-
-    def delete(self, request, pk):
-        try:
-            like = Like.objects.get(user=request.user, post_id=pk)
-            like.delete()
-            return Response({'message': 'Post unliked.'}, status=status.HTTP_204_NO_CONTENT)
-        except Like.DoesNotExist:
-            return Response({'message': 'You have not liked this post.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "Post liked."}, status=status.HTTP_201_CREATED)
