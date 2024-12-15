@@ -35,7 +35,7 @@ class LoginView(APIView):
 
 
 from rest_framework import status, permissions
-from rest_framework.views import APIView
+from rest_framework.views import generics
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from .models import CustomUser
@@ -62,3 +62,12 @@ class UnfollowUserView(APIView):
 
         request.user.following.remove(target_user)
         return Response({"message": f"You have unfollowed {target_user.username}."}, status=status.HTTP_200_OK)
+
+class UserListView(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserLoginSerializer
+
+    def get(self, request, *args, **kwargs):
+        users = self.get_queryset()
+        serializer = self.get_serializer(users, many=True)
+        return Response(serializer.data)
