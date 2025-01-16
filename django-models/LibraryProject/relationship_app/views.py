@@ -114,3 +114,26 @@ def delete_book(request, pk):
         book.delete()
         return redirect('book_list')
     return render(request, 'delete_book.html', {'book': book})
+
+
+
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Utility function to check user roles
+def check_role(user, role):
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == role
+
+# Views
+@user_passes_test(lambda u: check_role(u, 'Admin'))
+def admin_view(request):
+    return HttpResponse("Welcome, Admin!")
+
+@user_passes_test(lambda u: check_role(u, 'Librarian'))
+def librarian_view(request):
+    return HttpResponse("Welcome, Librarian!")
+
+@user_passes_test(lambda u: check_role(u, 'Member'))
+def member_view(request):
+    return HttpResponse("Welcome, Member!")
