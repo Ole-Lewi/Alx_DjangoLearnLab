@@ -1,8 +1,23 @@
 from django.shortcuts import render
 from .models import Book
 
+from django.shortcuts import render
+from .models import Book
+
 def list_books(request):
-   
+    books = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'books': books})
+
+from django.views.generic.detail import DetailView
+from .models import Library
+
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = 'relationship_app/library_detail.html'
+    context_object_name = 'library'
+
+def list_books(request):
+
     return(render,"relationship_app/list_books.html", "Book.objects.all()")
 
 from django.views.generic.detail import DetailView
@@ -40,7 +55,7 @@ from django.http import HttpResponseForbidden
 
 # Helper functions for role checking
 def is_admin(user):
-   return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
 
 def is_librarian(user):
     return user.userprofile.role == 'Librarian'

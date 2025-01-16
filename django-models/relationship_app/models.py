@@ -28,12 +28,12 @@ class Librarian(models.Model):
     def __str__(self):
         return self.name
 
-from django.db.import models
+from django.db import models
 from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    ROLES [
+    ROLES = [
         ('Admin','Admin'),
         ('Librarian', 'Librarian'),
         ('Member','Member')
@@ -62,11 +62,12 @@ def save_user_profile(sender, instance, **kwargs):
         published_date=models.DateField()
 
         class Meta:
-             permissions =[
-                 ("can_add_book" = "can add book"),
-                 ("can_change_book"='can edit book'),
-                 ("can_delete_book"="can delete book"),
+            
+            permissions =[
+                ("can_add_book" = "can add book"),
+                ("can_change_book"='can edit book'),
+                ("can_delete_book"="can delete book"),
                 
-             ]
+            ]
 def _str_(self):
     return self.title
