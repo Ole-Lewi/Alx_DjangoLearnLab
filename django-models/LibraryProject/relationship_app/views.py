@@ -137,3 +137,7 @@ def librarian_view(request):
 @user_passes_test(lambda u: check_role(u, 'Member'))
 def member_view(request):
     return HttpResponse("Welcome, Member!")
+
+@user_passes_test(lambda u: check_role(u, 'Admin'), login_url='/login/')
+def admin_view(request):
+    return HttpResponse("Welcome, Admin!")
